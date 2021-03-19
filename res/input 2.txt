@@ -1,0 +1,5 @@
+generate France
+generate Greece
+generate Checkerboard
+generate Rainbow
+generate Switzerland

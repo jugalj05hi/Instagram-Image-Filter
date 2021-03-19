@@ -1,0 +1,56 @@
+package controller.commands;
+
+import java.io.IOException;
+import java.util.Scanner;
+
+import model.createimages.FlagOfGreece;
+import model.createimages.GenerateImage;
+import model.imageloaders.ImageWriter;
+import model.imageloaders.ImageWriterImpl;
+
+/**
+ * The class controller.commands.GreeceFlagGenerateCommand is used to generate the Greece flag.
+ * The execute() method contains the logic behind the creation of the flag i.e the commands to be
+ * executed in sequence to generate the flag. The class implements controller.commands.Command
+ * class. When called from the controller it executes the command in order to achieve the
+ * task required.
+ */
+public class GreeceFlagGenerateCommand implements Command {
+
+  private Scanner in = new Scanner(System.in);
+
+  /**
+   * The method is implemented from the controller.commands.Command class and is used to generate
+   * required flag by calling the commands in order when called. The method is to be called by the
+   * controller.commands.CommandController object and not directly.
+   */
+  @Override
+  public void execute() {
+
+    /*
+     * Asks user about the dimensions of the image/flag.
+     */
+
+    System.out.print("\nPlease enter the height of the flag: ");
+    int gHeight = in.nextInt();
+
+    System.out.print("\nPlease enter the width of the flag: ");
+    int gWidth = in.nextInt();
+    in.nextLine();
+
+    /*
+     * Asks user for the image format.
+     */
+    System.out.print("\n Enter the image format: ");
+    String imageFormatGreece = in.nextLine();
+
+    GenerateImage image = new FlagOfGreece(gWidth, gHeight);
+    ImageWriter writeImage = new ImageWriterImpl();
+    try {
+      writeImage.writeImage(image.getImage(), "GreeceFlag."
+              + imageFormatGreece, imageFormatGreece);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+}
